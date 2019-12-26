@@ -1,0 +1,45 @@
+{
+  "name": "dream-company",
+  "version": "0.0.1",
+  "description": "This is my Website for Dream Company",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aryalg/node_js_company_website.git"
+  },
+  "keywords": [
+    "Node.js",
+    "Express.js",
+    "Mongoose.js"
+  ],
+  "author": "Bikram Aryal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aryalg/node_js_company_website/issues"
+  },
+  "homepage": "https://github.com/aryalg/node_js_company_website#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "mongoose": "^5.8.3",
+    "morgan": "^1.9.1",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^1.19.1"
+  }
+}
