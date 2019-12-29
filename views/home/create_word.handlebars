@@ -1,0 +1,171 @@
+
+
+
+<div class="contactus-area">
+  <div class="container">
+    
+    <!--contact form area-->
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="contact-form-area">
+          <!--contact left bg-->
+          <div class="contact-left-bg">
+            <img src="img/contact-p-2.png" alt="">
+          </div>
+          <div class="contact-form-heading">
+            <h3>Create New Word</h3>
+            <button onClick="updateForm()">Add Meaning</button>
+          </div>
+          <div class="contact-form" >
+            
+              
+              <input type="text" placeholder="Name of Word" class="one-whole-input" id="name-input">
+
+              <!-- <input type="text" placeholder="Meaning" class="two-input-one-line">
+
+              <input type="text" placeholder="Example" class="two-input-one-line-eg">
+
+               -->
+              <div id="hello-boro"></div>
+              
+              <input type="text" placeholder="Image URL" class="one-whole-input" id="image-input">
+              <div class="send-btn">
+                <button value="Create Word" onclick="myFunction()" id="formsend">Create Word</button>
+              </div>
+            </form>
+          </div>
+          <!--contact right bg-->
+          <div class="contact-right-bg">
+            <img src="img/contact-p-1.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+
+let index = 0;
+
+const myFunction = async () => {
+  let name = document.getElementById('name-input').value.trim();
+  let image = document.getElementById('image-input').value.trim();
+
+  if (!name) {
+    alert('Name cant be empty');
+    return ;
+  }
+
+  if(!image) {
+    alert('Name cant be empty');
+    return;
+  }
+  let arrayVocab = [];
+  let arrayImage = [image];
+
+  for (i = 1; i <= index; i++) {
+    console.log(i);
+    var body = document.querySelector(`.two-input-one-line-${i}`).value.trim();
+    var example = document.querySelector(`.two-input-one-line-eg-${i}`).value.trim();
+    if (body !== '' && example !== '') {
+
+      arrayVocab.push({ body, example });
+      document.querySelector(`.two-input-one-line-${i}`).value = '';
+      document.querySelector(`.two-input-one-line-eg-${i}`).value = '';
+    } else {
+      alert('Either Body or Example field is empty');
+      return;
+    }
+  }
+
+  var obj = {
+    name,
+    meaning: arrayVocab,
+    images: arrayImage
+  };
+  // console.log(`Submit is pressed where name and meaning are ${index}`);
+
+  try {
+    console.log(obj);
+    await axios({
+      method: 'POST',
+      url: 'https://nearkathmandu.com/api/v1/english/vocab',
+      data: obj
+    });
+    document.getElementById('name-input').value = '';
+     document.getElementById('image-input').value = '';
+  } catch (err) {
+    console.log(err);
+    console.log(`Submit is pressed where name and meaning are ${index}`);
+  }
+};
+
+const updateForm = () => {
+  index++;
+
+  console.log(`updateForm pressed! ${index}`);
+  var body = document.createElement('input');
+  var example = document.createElement('input');
+  var br1 = document.createElement('br');
+  var br2 = document.createElement('br');
+
+  body.placeholder = 'Enter meaning';
+  body.className = `two-input-one-line-${index}`;
+  example.className = `two-input-one-line-eg-${index}`;
+  example.placeholder = 'Enter Example';
+  // element.appendChild(body);
+  // element.appendChild(example);
+
+  document.getElementById('hello-boro').appendChild(body);
+  document.getElementById('hello-boro').appendChild(example);
+};
+
+document.onkeyup = function(e) {
+  // if (e.which == 78) {
+  //   updateForm();
+  // }
+  // console.log(e.which);
+};
+
+</script>
+  
+  
+  
+  <!-- <container>
+    <h1 class=>Sajilo GRE Vocabs</h1>
+    <button onClick="updateForm()">More</button>
+    <p>Enter the information in the form and post a request.</p>
+
+    Name:
+    <input
+      class="name-input"
+      type="text"
+      name="word-name"
+      placeholder="Write word here"
+    />
+    <br />
+    <br />
+
+    <input
+      class="image-input"
+      type="text"
+      name="image-url"
+      placeholder="Write Image URL here."
+    />
+
+    <br />
+    <br />
+   
+    <div id="div1">
+      </div>
+
+    <br />
+    <button class="btn" onclick="myFunction()">Send to Database</button>
+
+    
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/main_gre.js"></script>
+  </container> -->

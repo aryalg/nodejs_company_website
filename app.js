@@ -42,6 +42,14 @@ app.get('/', (req, res) => {
   res.render('home/index');
 });
 
+app.get('/gre', (req, res) => {
+  res.render('home/create_word')
+})
+
+app.get('/about', (req, res) => {
+  res.render('home/about')
+})
+
 app.get('/testing', (req, res) => {
   res.status(200).json({
     status: 'success',

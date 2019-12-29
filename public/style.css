@@ -2457,14 +2457,51 @@ footer p {
 	font-weight: 700
 }
 
-.contact-form-area input[type='text'] {
+.contact-form-area [class^="two-input-one-line"]  {
 	width: 49.6%;
 	background-color: transparent;
 	border: none;
 	border-bottom: 1px solid #323657;
 	padding: 10px 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	color: #323657
 }
+
+.contact-form-area [class^="two-input-one-line-eg"]  {
+	width: 49.6%;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid #323657;
+	padding: 10px 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: #323657
+}
+
+.contact-form-area .one-whole-input  {
+	width: 100%;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid #323657;
+	padding: 10px 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: #323657
+}
+
+/* .contact-form-area input[type='text'] {
+	width: 100%;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid #323657;
+	padding: 10px 5px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	color: #323657
+} */
+
+
 
 .contact-form-area input[type='email'] {
 	width: 100%;
