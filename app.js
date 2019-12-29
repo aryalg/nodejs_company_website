@@ -11,6 +11,8 @@ const AppError = require('./utils/appError');
 const app = express();
 
 const vocabRouter = require('./routes/vocabRoutes');
+const homeRouter = require('./routes/homeRoutes');
+const adminRouter = require('./routes/adminRoutes');
 
 //TODO: GLOBAL MIDDLEWARES
 
@@ -35,27 +37,12 @@ if (process.env.NODE_ENV === 'development') {
 app.engine('handlebars', exphbs({ defaultLayout: 'home' }));
 app.set('view engine', 'handlebars');
 
-//TODO: ROUTES
+//TODO: API ROUTES
 app.use('/api/v1/english/vocab', vocabRouter);
 
-app.get('/', (req, res) => {
-  res.render('home/index');
-});
-
-app.get('/gre', (req, res) => {
-  res.render('home/create_word')
-})
-
-app.get('/about', (req, res) => {
-  res.render('home/about')
-})
-
-app.get('/testing', (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    data: 'This is awesome'
-  });
-});
+//TODO: VIEW ROUTES
+app.use('/', homeRouter);
+app.use('/admin', adminRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
