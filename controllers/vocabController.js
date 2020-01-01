@@ -7,7 +7,17 @@ exports.getWord = factory.getOne(Vocab);
 
 exports.getAllWords = factory.getAll(Vocab);
 
-exports.createWord = factory.createOne(Vocab);
+exports.createWord = catchAsync(async (req, res, next) => {
+  console.log(req.files);
+  // const doc = await Vocab.create(req.body);
+
+  res.status(201).json({
+    status: 'success',
+    data: {
+      // data: doc
+    }
+  });
+});
 
 exports.deleteWord = factory.deleteOne(Vocab);
 
