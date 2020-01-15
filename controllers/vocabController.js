@@ -2,7 +2,7 @@ const factory = require('./handlerFactory');
 const Vocab = require('../models/vocabModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
-const { localIpAddress } = require('../utils/constants');
+const { localIpAddress, remoteIpAddress } = require('../utils/constants');
 
 exports.getWord = factory.getOne(Vocab);
 
@@ -18,7 +18,7 @@ exports.createWord = catchAsync(async (req, res, next) => {
     const imgArray = [];
     req.files.forEach(imageFile => {
       imgArray.push(
-        `http://${localIpAddress}/img/vocabs/${imageFile.filename}`
+        `http://${remoteIpAddress}/img/vocabs/${imageFile.filename}`
       );
     });
     console.log(imgArray);
