@@ -1,5 +1,6 @@
 const express = require('express');
 const multer = require('multer');
+const AppError = require('../utils/appError');
 const {
   getAllWords,
   createWord,
@@ -9,9 +10,29 @@ const {
   getRandomWord
 } = require('../controllers/vocabController');
 
-const { protect } = require('../controllers/authController');
+// const { protect } = require('../controllers/authController');
 
-const upload = multer({ dest: 'public/img/vocabs' });
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/img/vocabs');
+  },
+  filename: (req, file, cb) => {
+    const ext = file.mimetype.split('/')[1];
+
+    cb(null, `${req.body.name}-${req.files.length}.${ext}`);
+  }
+});
+
+const multerFilter = (req, file, cb) => {
+  console.log(file);
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(new AppError('Not an image! Please upload only image', 400), false);
+  }
+};
+
+const upload = multer({ storage: storage, fileFilter: multerFilter });
 const router = express.Router();
 
 router.route('/random').get(getRandomWord);
