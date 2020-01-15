@@ -24,7 +24,6 @@ const storage = multer.diskStorage({
 });
 
 const multerFilter = (req, file, cb) => {
-  console.log(file);
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
   } else {
@@ -38,7 +37,7 @@ const router = express.Router();
 router.route('/random').get(getRandomWord);
 
 // Protect all routes after this middle ware
-router.use(protect);
+// router.use(protect);
 
 router
   .route('/')

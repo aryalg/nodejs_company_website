@@ -1,7 +1,7 @@
 const factory = require('./handlerFactory');
 const Vocab = require('../models/vocabModel');
 const catchAsync = require('../utils/catchAsync');
-// const AppError = require('../utils/appError');
+const AppError = require('../utils/appError');
 const { localIpAddress } = require('../utils/constants');
 
 exports.getWord = factory.getOne(Vocab);
@@ -22,6 +22,9 @@ exports.createWord = catchAsync(async (req, res, next) => {
       );
     });
     console.log(imgArray);
+    if (imgArray.length === 0) {
+      return next(new AppError('You need to upload at least one image', 402));
+    }
     return res.status(201).json({
       status: 'success',
       data: {
@@ -30,12 +33,13 @@ exports.createWord = catchAsync(async (req, res, next) => {
     });
   }
   // There is meaning in body of res.body
-  res.status(201).json({
-    status: 'success',
-    data: {
-      data: req.body
-    }
-  });
+  return next(new AppError('You need to upload at least one image', 403));
+  // res.status(201).json({
+  //   status: 'success',
+  //   data: {
+  //     data: req.body
+  //   }
+  // });
 });
 
 exports.deleteWord = factory.deleteOne(Vocab);
