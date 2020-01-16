@@ -8,17 +8,14 @@ exports.getWord = factory.getOne(Vocab);
 
 exports.getAllWords = factory.getAll(Vocab);
 
-exports.createWord = catchAsync(async (req, res, next) => {
-  const doc = await Vocab.create(req.body);
-  console.log(req.body);
-
+exports.uploadImages = catchAsync(async (req, res, next) => {
   if (req.files) {
     console.log('There are files need to handled!');
     // Generate Array of uploaded images - download links
     const imgArray = [];
     req.files.forEach(imageFile => {
       imgArray.push(
-        `http://${remoteIpAddress}/img/vocabs/${imageFile.filename}`
+        `https://${remoteIpAddress}/img/vocabs/${imageFile.filename}`
       );
     });
     console.log(imgArray);
@@ -32,6 +29,13 @@ exports.createWord = catchAsync(async (req, res, next) => {
       }
     });
   }
+  return next(new AppError('You need to upload at least one image', 402));
+});
+
+exports.createWord = catchAsync(async (req, res, next) => {
+  const doc = await Vocab.create(req.body);
+  console.log(req.body);
+
   // There is meaning in body of res.body
   // return next(new AppError('You need to upload at least one image', 403));
   res.status(201).json({

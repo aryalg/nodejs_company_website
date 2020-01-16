@@ -7,7 +7,8 @@ const {
   updateWord,
   deleteWord,
   getWord,
-  getRandomWord
+  getRandomWord,
+  uploadImages
 } = require('../controllers/vocabController');
 
 // const { protect } = require('../controllers/authController');
@@ -35,6 +36,8 @@ const upload = multer({ storage: storage, fileFilter: multerFilter });
 const router = express.Router();
 
 router.route('/random').get(getRandomWord);
+
+router.route('/images').post(upload.array('photo', 5), uploadImages);
 
 // Protect all routes after this middle ware
 // router.use(protect);
