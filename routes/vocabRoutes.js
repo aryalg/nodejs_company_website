@@ -42,7 +42,8 @@ router.route('/random').get(getRandomWord);
 router
   .route('/')
   .get(getAllWords)
-  .post(upload.array('photo', 5), createWord);
+  // .post(upload.array('photo', 5), createWord);
+  .post(createWord);
 
 router
   .route('/:id')

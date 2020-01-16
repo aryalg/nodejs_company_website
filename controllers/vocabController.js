@@ -33,13 +33,13 @@ exports.createWord = catchAsync(async (req, res, next) => {
     });
   }
   // There is meaning in body of res.body
-  return next(new AppError('You need to upload at least one image', 403));
-  // res.status(201).json({
-  //   status: 'success',
-  //   data: {
-  //     data: req.body
-  //   }
-  // });
+  // return next(new AppError('You need to upload at least one image', 403));
+  res.status(201).json({
+    status: 'success',
+    data: {
+      data: req.body
+    }
+  });
 });
 
 exports.deleteWord = factory.deleteOne(Vocab);
