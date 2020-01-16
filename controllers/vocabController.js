@@ -9,7 +9,7 @@ exports.getWord = factory.getOne(Vocab);
 exports.getAllWords = factory.getAll(Vocab);
 
 exports.createWord = catchAsync(async (req, res, next) => {
-  // const doc = await Vocab.create(req.body);
+  const doc = await Vocab.create(req.body);
   console.log(req.body);
 
   if (req.files) {
@@ -37,7 +37,7 @@ exports.createWord = catchAsync(async (req, res, next) => {
   res.status(201).json({
     status: 'success',
     data: {
-      data: req.body
+      data: doc
     }
   });
 });
